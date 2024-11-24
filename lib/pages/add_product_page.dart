@@ -79,8 +79,8 @@ class AddProductPage extends StatelessWidget {
                       ctrl.update();
                       },)),
                     Flexible(child: DropDownBtn(
-                      items: ['puma', 'Adidas', 'Aarong',
-                        'Kay Kraft', 'Rang', 'Apple', 'HP',
+                      items: ['puma', 'Adidas', 'Aarong', 'ChipChamber',
+                        'Kay Kraft', 'Rang', 'Apple', 'HP', ' CircuitCove',
                         'Lenovo', 'Gucci', 'Louis Vuitton', 'Bata'],
                       selectedItemText: ctrl.brand,
                       onSelected: (selectedValue) {
