@@ -25,7 +25,7 @@ class AddProductPage extends StatelessWidget {
                     color: Colors.indigoAccent,
                     fontWeight: FontWeight.bold),),
                 TextField(
-                  //controller: ctrl.productNameCtrl,
+                  controller: ctrl.productNameCtrl,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)
@@ -36,7 +36,7 @@ class AddProductPage extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextField(
-                  //controller: ctrl.productDescriptionCtrl,
+                  controller: ctrl.productDescriptionCtrl,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)
@@ -48,7 +48,7 @@ class AddProductPage extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextField(
-                  //controller: ctrl.productImgCtrl,
+                  controller: ctrl.productImgCtrl,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)
@@ -59,7 +59,7 @@ class AddProductPage extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextField(
-                  //controller: ctrl.productPriceCtrl,
+                  controller: ctrl.productPriceCtrl,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)
@@ -72,16 +72,18 @@ class AddProductPage extends StatelessWidget {
                 Row(
                   children: [
                     Flexible(child: DropDownBtn(
-                      items: ['Cat1', 'Cat2', 'Cat3'],
+                      items: ['Boots', 'Fashion', 'Laptop', 'Electronics', 'shoes', 'Bags'],
                       selectedItemText: 'Category',
                       onSelected: (selectedValue) {
-                        print(selectedValue);
+                      ctrl.category = selectedValue ?? 'general';
                       },)),
                     Flexible(child: DropDownBtn(
-                      items: ['Brand1', 'Brand2', 'Brand3'],
+                      items: ['puma', 'Adidas', 'Aarong',
+                        'Kay Kraft', 'Rang', 'Apple', 'HP',
+                        'Lenovo', 'Gucci', 'Louis Vuitton', 'Bata'],
                       selectedItemText: 'Brand',
                       onSelected: (selectedValue) {
-                        print(selectedValue);
+                        ctrl.brand = selectedValue ?? 'un branded';
                       },)),
                   ],
                 ),
@@ -92,7 +94,7 @@ class AddProductPage extends StatelessWidget {
                   items: ['true', 'False'],
                   selectedItemText: 'Offer ?',
                   onSelected: (selectedValue) {
-                    print(selectedValue);
+                    ctrl.offer = bool.tryParse(selectedValue ?? 'false') ?? false;
                   },),
                 SizedBox(height: 10),
                 ElevatedButton(

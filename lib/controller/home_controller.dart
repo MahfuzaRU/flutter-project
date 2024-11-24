@@ -9,6 +9,14 @@ class HomeController extends GetxController{
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   late CollectionReference productCollection;
+  TextEditingController productNameCtrl = TextEditingController();
+  TextEditingController productDescriptionCtrl = TextEditingController();
+  TextEditingController productImgCtrl = TextEditingController();
+  TextEditingController productPriceCtrl = TextEditingController();
+
+  String category = 'general';
+  String brand = 'un brand';
+  bool offer = false;
 
 
   @override
@@ -25,13 +33,13 @@ class HomeController extends GetxController{
       DocumentReference doc = productCollection.doc();
       Product product = Product(
             id:  doc.id,
-            name: 'test name from flutter',
-            category: 'Boots',
-            description: 'test name from flutter',
-            price: 500,
-            brand: 'Adidas',
-            image: 'img url',
-            offer: true,
+            name: productNameCtrl.text,
+            category: category,
+            description: productDescriptionCtrl.text,
+            price: double.tryParse(productPriceCtrl.text),
+            brand: brand,
+            image: productImgCtrl.text,
+            offer: offer,
 
           );
       final productJson = product.toJson();
