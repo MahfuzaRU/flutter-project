@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: Text('Footware Admin'),
       ),
       body: ListView.builder(
-        itemCount: 10,
+        itemCount: 6,
           itemBuilder: (context, index){
           return ListTile(
             title: Text('Title'),
