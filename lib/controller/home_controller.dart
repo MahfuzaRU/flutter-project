@@ -1,12 +1,9 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:footwarea/model/product/product.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController{
-
+class HomeController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   late CollectionReference productCollection;
   TextEditingController productNameCtrl = TextEditingController();
@@ -18,70 +15,82 @@ class HomeController extends GetxController{
   String brand = 'un brand';
   bool offer = false;
 
-    List<Product> products = [];
-
+  List<ProductModel> products = [];
 
   @override
   Future<void> onInit() async {
-        productCollection = firestore.collection('products');
-        await fetchProducts();
-        super.onInit();
+    productCollection = firestore.collection('products');
+    await fetchProducts();
+    super.onInit();
   }
 
-
-  addProduct(){
+  addProduct() {
     try {
-      DocumentReference doc = productCollection.doc();
-      Product product = Product(
-            id:  doc.id,
-            name: productNameCtrl.text,
-            category: category,
-            description: productDescriptionCtrl.text,
-            price: double.tryParse(productPriceCtrl.text),
-            brand: brand,
-            image: productImgCtrl.text,
-            offer: offer,
+      if (productNameCtrl.text.isEmpty ||
+          productDescriptionCtrl.text.isEmpty ||
+          productImgCtrl.text.isEmpty ||
+          productPriceCtrl.text.isEmpty) {
+        Get.snackbar('error', 'please fill all fields', colorText: Colors.red);
+        return;
+      }
+      if (double.parse(productPriceCtrl.text) <= 0) {
+        Get.snackbar('error', 'price must be greater than 0',
+            colorText: Colors.red);
+        return;
+      }
 
-          );
+      DocumentReference doc = productCollection.doc();
+      ProductModel product = ProductModel(
+        id: doc.id,
+        name: productNameCtrl.text,
+        category: category,
+        description: productDescriptionCtrl.text,
+        price: double.parse(productPriceCtrl.text),
+        brand: brand,
+        image: productImgCtrl.text,
+        offer: offer,
+      );
       final productJson = product.toJson();
       doc.set(productJson);
-      Get.snackbar('success', 'product added successfully', colorText: Colors.green);
+      Get.snackbar('success', 'product added successfully',
+          colorText: Colors.green);
       setValuesDefault();
     } catch (e) {
-      Get.snackbar('error', e.toString(),colorText: Colors.green);
-      print(e);
+      Get.snackbar('error', e.toString(), colorText: Colors.green);
     }
-
   }
 
-    fetchProducts() async {
+  fetchProducts() async {
     try {
       QuerySnapshot productSnapshot = await productCollection.get();
-      final List<Product> retrievedProducts = productSnapshot.docs.map((doc) =>
-              Product.fromJson(doc.data() as Map<String,dynamic>)).toList();
+      // log("productSnapshot: $productSnapshot");
+      final List<ProductModel> retrievedProducts = productSnapshot.docs
+          .map((doc) =>
+              ProductModel.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+
       products.clear();
       products.assignAll(retrievedProducts);
-      Get.snackbar('success', 'product fetch successfully', colorText: Colors.green);
+      Get.snackbar('success', 'product fetch successfully',
+          colorText: Colors.green);
     } catch (e) {
+      // log("error: $e");
       Get.snackbar('error', e.toString(), colorText: Colors.red);
-      print(e);
-    }
-    finally {
+    } finally {
       update();
     }
   }
 
-    deleteProduct(String id) {
+  deleteProduct(String id) {
     try {
       productCollection.doc(id).delete();
       fetchProducts();
     } catch (e) {
       Get.snackbar('error', e.toString(), colorText: Colors.red);
-      print(e);
     }
   }
 
-  setValuesDefault(){
+  setValuesDefault() {
     productNameCtrl.clear();
     productPriceCtrl.clear();
     productDescriptionCtrl.clear();
@@ -91,6 +100,4 @@ class HomeController extends GetxController{
     offer = false;
     update();
   }
-
-
 }
