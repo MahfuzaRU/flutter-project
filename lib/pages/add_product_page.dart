@@ -73,17 +73,19 @@ class AddProductPage extends StatelessWidget {
                   children: [
                     Flexible(child: DropDownBtn(
                       items: ['Boots', 'Fashion', 'Laptop', 'Electronics', 'shoes', 'Bags'],
-                      selectedItemText: 'Category',
+                      selectedItemText: ctrl.category,
                       onSelected: (selectedValue) {
                       ctrl.category = selectedValue ?? 'general';
+                      ctrl.update();
                       },)),
                     Flexible(child: DropDownBtn(
                       items: ['puma', 'Adidas', 'Aarong',
                         'Kay Kraft', 'Rang', 'Apple', 'HP',
                         'Lenovo', 'Gucci', 'Louis Vuitton', 'Bata'],
-                      selectedItemText: 'Brand',
+                      selectedItemText: ctrl.brand,
                       onSelected: (selectedValue) {
                         ctrl.brand = selectedValue ?? 'un branded';
+                        ctrl.update();
                       },)),
                   ],
                 ),
@@ -92,9 +94,10 @@ class AddProductPage extends StatelessWidget {
                 SizedBox(height: 10),
                 DropDownBtn(
                   items: ['true', 'False'],
-                  selectedItemText: 'Offer ?',
+                  selectedItemText: ctrl.offer.toString(),
                   onSelected: (selectedValue) {
                     ctrl.offer = bool.tryParse(selectedValue ?? 'false') ?? false;
+                    ctrl.update();
                   },),
                 SizedBox(height: 10),
                 ElevatedButton(
