@@ -100,7 +100,9 @@ class AddProductPage extends StatelessWidget {
                         backgroundColor: Colors.indigoAccent,
                         foregroundColor: Colors.white
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      ctrl.addProduct();
+                    },
                     child: Text('Add Product'))
                 // DropdownBtn(items: ['true', 'false'],
                 //       selectedItemText: ctrl.offer.toString(),
