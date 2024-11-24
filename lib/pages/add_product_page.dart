@@ -1,4 +1,3 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:footwarea/controller/home_controller.dart';
 import 'package:get/get.dart';
@@ -12,104 +11,127 @@ class AddProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (ctrl) {
       return Scaffold(
-        appBar: AppBar(title: Text('add product'),),
+        appBar: AppBar(
+          title: const Text(
+            'Add product',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+        ),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.all(10),
-            width: double.maxFinite,
+            margin: const EdgeInsets.all(10),
+            width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'Add new Product', style: TextStyle(fontSize: 30,
-                    color: Colors.indigoAccent,
-                    fontWeight: FontWeight.bold),),
+                const Text(
+                  'Add New Product',
+                  style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.indigoAccent,
+                      fontWeight: FontWeight.bold),
+                ),
                 TextField(
                   controller: ctrl.productNameCtrl,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      ),
-                      label: Text('Product Name'),
-                      hintText: 'Enter Your product Name'
-                  ),
+                          borderRadius: BorderRadius.circular(10)),
+                      label: const Text('Product Name'),
+                      hintText: 'Enter Your product Name'),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextField(
                   controller: ctrl.productDescriptionCtrl,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      ),
-                      label: Text('Product Description'),
-                      hintText: 'Enter Your Product description'
-                  ),
+                          borderRadius: BorderRadius.circular(10)),
+                      label: const Text('Product Description'),
+                      hintText: 'Enter Your Product description'),
                   maxLines: 4,
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextField(
                   controller: ctrl.productImgCtrl,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      ),
-                      label: Text('Image Url'),
-                      hintText: 'Enter Image Url'
-                  ),
+                          borderRadius: BorderRadius.circular(10)),
+                      label: const Text('Image Url'),
+                      hintText: 'Enter Image Url'),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextField(
                   controller: ctrl.productPriceCtrl,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      ),
-                      label: Text('Product Price'),
-                      hintText: 'Enter Your product Price'
-                  ),
+                          borderRadius: BorderRadius.circular(10)),
+                      label: const Text('Product Price'),
+                      hintText: 'Enter Your product Price'),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   children: [
-                    Flexible(child: DropDownBtn(
-                      items: ['Boots', 'Fashion', 'Laptop', 'Electronics', 'shoes', 'Bags'],
+                    Flexible(
+                        child: DropDownBtn(
+                      items: const [
+                        'Boots',
+                        'Fashion',
+                        'Laptop',
+                        'Electronics',
+                        'shoes',
+                        'Bags'
+                      ],
                       selectedItemText: ctrl.category,
                       onSelected: (selectedValue) {
-                      ctrl.category = selectedValue ?? 'general';
-                      ctrl.update();
-                      },)),
-                    Flexible(child: DropDownBtn(
-                      items: ['puma', 'Adidas', 'Aarong', 'ChipChamber',
-                        'Kay Kraft', 'Rang', 'Apple', 'HP', ' CircuitCove',
-                        'Lenovo', 'Gucci', 'Louis Vuitton', 'Bata'],
+                        ctrl.category = selectedValue ?? 'general';
+                        ctrl.update();
+                      },
+                    )),
+                    Flexible(
+                        child: DropDownBtn(
+                      items: const [
+                        'puma',
+                        'Adidas',
+                        'Aarong',
+                        'ChipChamber',
+                        'Kay Kraft',
+                        'Rang',
+                        'Apple',
+                        'HP',
+                        ' CircuitCove',
+                        'Lenovo',
+                        'Gucci',
+                        'Louis Vuitton',
+                        'Bata'
+                      ],
                       selectedItemText: ctrl.brand,
                       onSelected: (selectedValue) {
                         ctrl.brand = selectedValue ?? 'un branded';
                         ctrl.update();
-                      },)),
+                      },
+                    )),
                   ],
                 ),
-                SizedBox(height: 10),
-                Text('Offer Product ?'),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
+                const Text('Offer Product ?'),
+                const SizedBox(height: 10),
                 DropDownBtn(
-                  items: ['true', 'False'],
+                  items: const ['true', 'False'],
                   selectedItemText: ctrl.offer.toString(),
                   onSelected: (selectedValue) {
-                    ctrl.offer = bool.tryParse(selectedValue ?? 'false') ?? false;
+                    ctrl.offer =
+                        bool.tryParse(selectedValue ?? 'false') ?? false;
                     ctrl.update();
-                  },),
-                SizedBox(height: 10),
+                  },
+                ),
+                const SizedBox(height: 10),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.indigoAccent,
-                        foregroundColor: Colors.white
-                    ),
+                        foregroundColor: Colors.white),
                     onPressed: () {
                       ctrl.addProduct();
                     },
-                    child: Text('Add Product')),
-
+                    child: const Text('Add Product')),
               ],
             ),
           ),
@@ -118,4 +140,3 @@ class AddProductPage extends StatelessWidget {
     });
   }
 }
-
