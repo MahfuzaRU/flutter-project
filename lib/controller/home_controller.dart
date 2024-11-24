@@ -23,11 +23,9 @@ class HomeController extends GetxController{
 
   @override
   Future<void> onInit() async {
-    // TODO: implement onInit
         productCollection = firestore.collection('products');
         await fetchProducts();
-
-    super.onInit();
+        super.onInit();
   }
 
 
@@ -70,6 +68,16 @@ class HomeController extends GetxController{
     }
     finally {
       update();
+    }
+  }
+
+    deleteProduct(String id) {
+    try {
+      productCollection.doc(id).delete();
+      fetchProducts();
+    } catch (e) {
+      Get.snackbar('error', e.toString(), colorText: Colors.red);
+      print(e);
     }
   }
 

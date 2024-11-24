@@ -15,21 +15,22 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(title: Text('Footware Admin'),
         ),
         body: ListView.builder(
-            itemCount: 6,
+            itemCount: ctrl.products.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text('Title'),
-                subtitle: Text('price : 100'),
+                title: Text(ctrl.products[index].name ?? ''),
+                subtitle: Text((ctrl.products[index].price ?? 0).toString()),
                 trailing: IconButton(
                   icon: Icon(Icons.delete),
                   onPressed: () {
+                  ctrl.deleteProduct(ctrl.products[index].id ?? ' ');
+
                   },),
               );
             }
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            //print('add new data');
             Get.to(AddProductPage());
           },
           child: Icon(Icons.add),
