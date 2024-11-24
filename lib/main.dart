@@ -9,12 +9,10 @@ import 'package:get/get.dart';
 import 'controller/home_controller.dart';
 import 'firebase_options.dart';
 
-// Future<void> main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp(options: firebaseOptions);
-//   //? Registering my controller
-//   Get.put(HomeController());
 void main(){
+   WidgetsFlutterBinding.ensureInitialized();
+   Firebase.initializeApp(options: firebaseOptions);
+  Get.put(HomeController());
   runApp(const MyApp());
 }
 
@@ -31,7 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: AddProductPage(),
+      home: const HomePage(),
     );
   }
 }

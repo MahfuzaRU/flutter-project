@@ -1,6 +1,5 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:footwarea/controller/home_controller.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -11,35 +10,34 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Footware Admin'),
-      ),
-      body: ListView.builder(
-        itemCount: 6,
-          itemBuilder: (context, index){
-          return ListTile(
-            title: Text('Title'),
-            subtitle: Text('price : 100'),
-            trailing: IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: (){
-                print('delect');
-              },),
-          );
-          }
-      ),
-    floatingActionButton: FloatingActionButton(
+    return GetBuilder<HomeController>(builder: (ctrl) {
+      return Scaffold(
+        appBar: AppBar(title: Text('Footware Admin'),
+        ),
+        body: ListView.builder(
+            itemCount: 6,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text('Title'),
+                subtitle: Text('price : 100'),
+                trailing: IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () {
+                  },),
+              );
+            }
+        ),
+        floatingActionButton: FloatingActionButton(
           onPressed: () {
             //print('add new data');
             Get.to(AddProductPage());
           },
           child: Icon(Icons.add),
         ),
-    );
+      );
+    });
   }
 }
-
-
 
 
 // //import 'package:flutter/cupertino.dart';
